@@ -1,0 +1,1 @@
+In this project I used, express,nodemoon, mongoose, multer (to handle multidata), sharp (to resize images), cors(allowed access from diferent applications, both react and native), socket.io (websocket) .
