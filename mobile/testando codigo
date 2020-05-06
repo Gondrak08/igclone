@@ -1,0 +1,137 @@
+const [author, setauthor] = useState('');
+    const [place, setplace] = useState('');
+    const [description, setdescription] = useState('');
+    const [hashtags, sethashtags] = useState('');
+    const [selectedImage, setSelectedImage] = useState(null);
+    const [image, setImage] = useState(null)
+
+
+    // const [state, setState] = useState([{
+    //     image: null,
+    //     selectedImage: null
+    // }]);
+
+    // const [state, setState] = useState([{
+    //     author:'',
+    //     place: '',
+    //     description: '',
+    //     hashtags: ''
+    // }])
+
+    // useEffect(() => {
+    //     async function getCamera(){
+    //         const{status} = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+    //         setState({selectedImage: status === "granted"})
+    //     }
+    //     getCamera();
+    // }, [])
+
+
+
+    // async function getPhotoCamera(){
+    //     let permissionsCamera = Permissions.CAMERA;
+
+    //             let {status} = await Permissions.askAsync(permissionsCamera)
+    //             console.log(permissionsCamera, status);
+    //                 if(status === 'granted') {
+    //                 let image = await ImagePicker.launchCameraAsync({
+    //                 mediaTypes: 'Images',
+    //                 }).catch(error => console.log(permissionsCamera, { error }));
+    //                 console.log(permissionsCamera, 'SUCCESS', image);
+    //                 }
+        
+        
+    //             let pickerResult = await ImagePicker.launchImageLibraryAsync();
+    //             console.log(pickerResult);
+        
+    //                 if(pickerResult.cancelled === true){
+    //                     return;
+    //                 }
+        
+    // }
+
+
+
+    // async function getPhotoLibrary(){
+    //     let result = await ImagePicker.launchImageLibraryAsync({
+    //         allowsEditing: true,
+    //         aspect:[4,3]
+    //     });
+    //     if(!result.cancelled){
+    //         setState({image: result.uri});
+    //     }
+    // }
+
+
+
+   
+   let openImagePickerAsync = async() => {
+        // let permissionResult = await ImagePicker.requestCameraPermissionsAsync();
+
+        // if(permissionResult.granted === false){
+        //     alert("Permission to access camera roll is required!");
+        //     return;
+        // }
+
+        // let permissionsCamera = Permissions.CAMERA;
+
+        // let {status} = await Permissions.askAsync(permissionsCamera)
+        // console.log(permissionsCamera, status);
+        //     if(status === 'granted') {
+        //     let image = await ImagePicker.launchCameraAsync({
+        //     mediaTypes: 'Images',
+        //     }).catch(error => console.log(permissionsCamera, { error }));
+        //     console.log(permissionsCamera, 'SUCCESS', image);
+        //     }
+
+
+        let pickerResult = await ImagePicker.launchImageLibraryAsync();
+        console.log(pickerResult);
+
+            if(pickerResult.cancelled === true){
+                return;
+            }
+            //     let prefix;
+            //     let ext;
+            
+            //    if(pickerResult.fileName){
+            //         [prefix, ext] = pickerResult.fileName.split('.')
+            //         ext = ext.toLowerCase() === 'heic' ? 'jpg' : ext;
+            //        } else{
+            //                prefix = new Date().getTime();
+            //                ext = 'jpg';
+            //            }
+                    
+            //     const image = {
+            //             uri: pickerResult.uri,
+            //             type: pickerResult.type,
+            //             name: `${prefix}.${ext}`
+            //         };
+             
+            
+            let fileName = fileName.split('.');
+            const image ={
+                uri: pickerResult.uri,
+                type: "image/jpeg",
+                name: fileName
+            }
+
+            const formData = new FormData();
+            formData.appeend("image", image);
+
+
+            // const formData = new formData();
+            // formData.append('Descripcion', inputDescripcion );
+
+            // formData.append('photo', {
+            //     uri: Platform.OS === "android" ? image.uri : image.uri.replace("file://", ""),
+            //     type: 'image/jpeg',
+            //     name: 'photo.jpeg'
+            // })
+
+                        
+        setSelectedImage({ localUri: pickerResult.uri}, image)
+        setImage(image)
+    };
+
+

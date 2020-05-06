@@ -34,20 +34,25 @@ export default function Feed({navigation}){
         
     }, [feed]);
     
-    registerToStocket();
-    async function registerToStocket(){
-        const socket= io('http://192.168.1.2:3333');
-        socket.on('post', newPost=>{
-            setfeed([newPost, ...feed]);
-        })
-        
-        socket.on('like', likedPost=>{
-            setfeed( feed.map(post =>
-                post._id === likedPost._id ? likedPost : post)
-                );
+    useEffect(()=>{
+       
+        async function registerToStocket(){
+            const socket= io('http://192.168.1.2:3333');
+            socket.on('post', newPost=>{
+                setfeed([newPost, ...feed]);
             })
-        }
-        
+            
+            socket.on('like', likedPost=>{
+                setfeed( feed.map(post =>
+                    post._id === likedPost._id ? likedPost : post)
+                    );
+                })
+            }
+            registerToStocket();     
+    },[])
+
+
+
         function handleLike(id){
             api.post(`/posts/${id}/like`);
         }

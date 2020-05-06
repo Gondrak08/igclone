@@ -13,7 +13,7 @@ const AppStack = createStackNavigator();
 export default function Routes(){
     return(
         <NavigationContainer>
-            <AppStack.Navigator  initialRouteName="Feed" headerMode="screen" 
+            <AppStack.Navigator  initialRouteName="New" headerMode="screen" 
                 screenOptions={{
                     headerTintColor: '#000',
                     headerBackTitle: null,
